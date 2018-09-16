@@ -7,19 +7,43 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
+    public int dollar = 14000;
+    double roundTwoDecimals(double d)
+    {
+        DecimalFormat twoDForm = new DecimalFormat("#.##");
+        return Double.valueOf(twoDForm.format(d));
+    }
     public void login(View view)
     {
+        try {
+
+
         EditText Username = (EditText) findViewById(R.id.UsernameEditText);
-        EditText Password = (EditText) findViewById(R.id.PasswordEditText);
-        Log.i("username"  ,Username.getText().toString());
-        Log.i("Password"  ,Password.getText().toString());
-        Log.i("msg","test login");
-        TextView textView = (TextView) findViewById(R.id.UsernameTextView);
-        textView.setText("login done");
-        Toast.makeText(this, "hello " + Username.getText().toString() , Toast.LENGTH_SHORT).show();
+
+        String value= Username.getText().toString();
+
+        double finalValue=Double.parseDouble(value);
+        finalValue/=dollar;
+        finalValue = roundTwoDecimals(finalValue);
+        String resault =Double.toString(finalValue);
+
+//        double amount =finalValue/dollar;
+//        Log.i("price ", (Double.toString(amount)));
+
+
+
+//        TextView textView = (TextView) findViewById(R.id.UsernameTextView);
+//
+        Toast.makeText(this, "$ "+resault , Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this, "مقدار اشتباه" , Toast.LENGTH_SHORT).show();
+        }
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
